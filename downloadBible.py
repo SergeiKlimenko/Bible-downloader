@@ -74,12 +74,9 @@ for languageLink in languageLinks[:1]:
                 while True:
                     chapterSoup = getPage(link)
                     spans = chapterSoup.select('span[class^="verse"]')
-                    #Get heading and book title and chapter number into the file
-#                    fullPage = list()
                     #Write the book title and chapter number to the file
                     f.write('\n' + '_'.join(chapterSoup.select_one('title').getText().split(',')[0].upper().split()) + '\n')
                     for span in spans:
-                        #fullPage.append(span.getText().strip())
                         if span.getText() != ' ':
                             f.write(span.getText() + '\n')
                     try:
@@ -87,10 +84,3 @@ for languageLink in languageLinks[:1]:
                     except:
                         break
                     link = 'http://www.bible.com' + nextLinkHtml.get('href')
-
-                    #fullVerse = ' '.join(fullVerse)
-#                    f.write(fullVerse)
-
-        
-            #Read all pages
-                #Save to a file
