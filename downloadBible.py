@@ -114,7 +114,7 @@ for languageLink in languageLinks:
                         continue
                     for child in span.children:
                         if child.get("class")[0] != "note":
-                        f.write(child.getText())
+                            f.write(child.getText())
                     f.write('\n')
                 f.write('\n')
                 #Get the next page link or break if it's the end of the book
