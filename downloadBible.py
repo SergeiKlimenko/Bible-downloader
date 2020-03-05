@@ -85,7 +85,6 @@ for languageLink in languageLinks:
             continue
         with open(fileName, 'a', encoding='utf-8-sig') as f:
             link = 'http://www.bible.com/bible/{}/GEN.INTRO1.{}'.format(translationCode[0], translationCode[1])
-            missingPageCounter = 0
             while True:
                 chapterSoup = getPage(link)
                 spans = chapterSoup.select('span[class^="verse"]')
@@ -97,11 +96,10 @@ for languageLink in languageLinks:
                     print("    Initiating {}".format(chapterSoup.select_one('title').getText().split(',')[0]))
                 except:
                     if chapterSoup.select_one('body').getText().startswith('{"statusCode":404'):
-                        missingPageCounter += 1 #Change to the actual link!!!
-                        if missingPageCounter == 1:
+                        if oldLink == 'http://www.bible.com/bible/37/LJE.INTRO1.CEB':
                             link = 'https://www.bible.com/bible/37/SUS.1.CEB'
                             continue
-                        elif missingPageCounter == 2:
+                        elif oldLink == 'http://www.bible.com/bible/37/MAN.1.CEB':
                             #The second occurrence of empty pages: https://www.bible.com/bible/37/PS2.1.CEB,
                             #https://www.bible.com/bible/37/PS2.2.CEB, and https://www.bible.com/bible/37/PS2.3.CEB
                             link = 'https://www.bible.com/bible/37/3MA.1.CEB'
@@ -109,15 +107,20 @@ for languageLink in languageLinks:
                         else:
                             raise
                 #Write the book title and chapter number to the file
-                f.write('\n' + '_'.join(chapterSoup.select_one('title').getText().split(',')[0].upper().split()) + '\n')
+                f.write('_'.join(chapterSoup.select_one('title').getText().split(',')[0].upper().split()) + '\n')
+                #Write verses to the file
                 for span in spans:
-                    if span.getText() != ' ':
-                        f.write(span.getText() + '\n')
+                    if span.getText() == ' ':
+                        continue
+                    for child in span.children:
+                        if child.get("class")[0] != "note":
+                        f.write(child.getText())
+                    f.write('\n')
+                f.write('\n')
                 #Get the next page link or break if it's the end of the book
                 try:
                     nextLinkHtml = chapterSoup.select_one('a[data-vars-event-action="Next"]')
+                    oldLink = link
                     link = 'http://www.bible.com' + nextLinkHtml.get('href')
                 except:
                     break
-
-#TODO: Exclude comments from downloading
