@@ -113,6 +113,9 @@ for languageLink in languageLinks:
                     if span.getText() == ' ':
                         continue
                     for child in span.children:
+                        if isinstance(child, bs.element.NavigableString):
+                            f.write(child)
+                            continue
                         if child.get("class")[0] != "note":
                             f.write(child.getText())
                     f.write('\n')
