@@ -79,11 +79,12 @@ for languageLink in languageLinks:
         #Write into a file for the particular translation
         languageName = '_'.join(languageName.split(' '))
         translationName = '_'.join(translationName.split(' '))
-        fileName = os.path.join(newDir, '{}--{}.txt'.format(languageName, translationName))
+        fileName = os.path.join(newDir, '{}--{}.txt'.format(languageName, translationName).replace(':', ''))
         #Check if the file exists to skip if necessary (to resume the program when it hits an unexpected error)
         if os.path.isfile(fileName):
             continue
         with open(fileName, 'a', encoding='utf-8-sig') as f:
+            print(fileName)
             link = 'http://www.bible.com/bible/{}/GEN.INTRO1.{}'.format(translationCode[0], translationCode[1])
             while True:
                 chapterSoup = getPage(link)
@@ -95,14 +96,30 @@ for languageLink in languageLinks:
                 try:
                     print("    Initiating {}".format(chapterSoup.select_one('title').getText().split(',')[0]))
                 except:
-                    if chapterSoup.select_one('body').getText().startswith('{"statusCode":404'):
-                        if oldLink == 'http://www.bible.com/bible/37/LJE.INTRO1.CEB':
+                    if chapterSoup.select_one('body').getText().startswith('{"statusCode":404'):                     
+                        if oldLink == 'http://www.bible.com/bible/37/LJE.1.CEB':
                             link = 'https://www.bible.com/bible/37/SUS.1.CEB'
                             continue
                         elif oldLink == 'http://www.bible.com/bible/37/MAN.1.CEB':
                             #The second occurrence of empty pages: https://www.bible.com/bible/37/PS2.1.CEB,
                             #https://www.bible.com/bible/37/PS2.2.CEB, and https://www.bible.com/bible/37/PS2.3.CEB
                             link = 'https://www.bible.com/bible/37/3MA.1.CEB'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/303/LJE.1_1.CEVDCI':
+                            #The third occurrence: https://www.bible.com/fr/bible/303/S3Y.1.CEVDCI
+                            link = 'https://www.bible.com/bible/303/SUS.1_1.CEVDCI'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/416/LJE.1.GNBDC':
+                            #The fourth occurrence
+                            link = 'https://www.bible.com/bible/416/SUS.INTRO1.GNBDC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/69/LJE.1_1.GNTD':
+                            #The fifth occurrence
+                            link = 'https://www.bible.com/bible/69/SUS.INTRO1.GNTD'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/546/BAR.6.KJVA':
+                            #The sixth occurrence
+                            link = 'https://www.bible.com/bible/546/SUS.INTRO1.KJVA'
                             continue
                         else:
                             raise
