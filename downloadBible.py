@@ -84,7 +84,6 @@ for languageLink in languageLinks:
         if os.path.isfile(fileName):
             continue
         with open(fileName, 'a', encoding='utf-8-sig') as f:
-            print(fileName)
             link = 'http://www.bible.com/bible/{}/GEN.INTRO1.{}'.format(translationCode[0], translationCode[1])
             while True:
                 chapterSoup = getPage(link)
