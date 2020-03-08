@@ -120,6 +120,18 @@ for languageLink in languageLinks:
                             #The sixth occurrence
                             link = 'https://www.bible.com/bible/546/SUS.INTRO1.KJVA'
                             continue
+                        elif oldLink == 'http://www.bible.com/bible/2015/LJE.1_1.NRSV-CI':
+                            link = 'https://www.bible.com/bible/2015/SUS.1_1.NRSV-CI'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2017/LJE.1_1.RSV-CI':
+                            link = 'https://www.bible.com/bible/2017/SUS.1_1.RSV-CI'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1922/LJE.1_1.RV1895':
+                            link = 'https://www.bible.com/bible/1922/SUS.1.RV1895'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/206/LJE.6.WEB':
+                            link = 'https://www.bible.com/bible/206/SUS.1.WEB'
+                            continue
                         else:
                             raise
                 #Write the book title and chapter number to the file
