@@ -79,7 +79,7 @@ for languageLink in languageLinks:
         #Write into a file for the particular translation
         languageName = '_'.join(languageName.split(' '))
         translationName = '_'.join(translationName.split(' '))
-        fileName = os.path.join(newDir, '{}--{}.txt'.format(languageName, translationName).replace(':', ''))
+        fileName = os.path.join(newDir, '{}--{}.txt'.format(languageName, translationName).replace(':', '').replace('/', '-'))
         #Check if the file exists to skip if necessary (to resume the program when it hits an unexpected error)
         if os.path.isfile(fileName):
             continue
@@ -131,6 +131,32 @@ for languageLink in languageLinks:
                             continue
                         elif oldLink == 'http://www.bible.com/bible/206/LJE.6.WEB':
                             link = 'https://www.bible.com/bible/206/SUS.1.WEB'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/206/MAN.1.WEB':
+                            break
+                        elif oldLink == 'http://www.bible.com/bible/1204/4MA.18.WEBBE':
+                            link = 'https://www.bible.com/bible/1204/DAG.1.WEBBE'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2407/LJE.1.WBMS':
+                            link = 'https://www.bible.com/bible/2407/SUS.1.WBMS'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/377/LJE.1_1.BMDC':
+                            link = 'https://www.bible.com/bible/377/SUS.1_1.BMDC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/221/LJE.1.BCNDA':
+                            link = 'https://www.bible.com/bible/221/SUS.1.BCNDA'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2101/LJE.1_1.BWMA':
+                            link = 'https://www.bible.com/bible/2101/SUS.1.BWMA'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/178/LJE.1_1.TLAI':
+                            link = 'https://www.bible.com/bible/178/SUS.1_1.TLAI'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2197/LJE.1.MBBTAG12':
+                            link = 'https://www.bible.com/bible/2197/SUS.1.MBBTAG12'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/144/LJE.1.MBB05':
+                            link = 'https://www.bible.com/bible/144/SUS.1.MBB05'
                             continue
                         else:
                             raise
