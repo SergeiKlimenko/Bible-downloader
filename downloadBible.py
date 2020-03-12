@@ -64,15 +64,16 @@ for languageLink in languageLinks:
         try:
             if '/versions/' in item.get('href'):
                 #Check if the language is already in the dictionary to add another translation:
+                codes = re.search(translationPattern, item.get('href')).group(1, 2)
                 if languageLink in translations:
-                    translations[languageLink][item.getText()] = item.get('href')
+                    translations[languageLink][item.getText()+'_'+codes[1]] = item.get('href')
                 else:
-                    translations[languageLink] = {item.getText():item.get('href')}
+                    translations[languageLink] = {item.getText()+'_'+codes[1]:item.get('href')}
         except:
             continue
     #Access each tranlation
     for translationName, translationLink in translations[languageLink].items():
-        codes = re.search(translationPattern, translationLink).group(1, 2)
+#        codes = re.search(translationPattern, translationLink).group(1, 2)
         translationCodes[translationName] = codes
     for translationName, translationCode in translationCodes.items():
         print("Initiating {}".format(translationName))
@@ -158,6 +159,12 @@ for languageLink in languageLinks:
                         elif oldLink == 'http://www.bible.com/bible/144/LJE.1.MBB05':
                             link = 'https://www.bible.com/bible/144/SUS.1.MBB05'
                             continue
+                        elif oldLink == 'http://www.bible.com/bible/393/LJE.1.BHND':
+                            link = 'https://www.bible.com/bible/393/SUS.1.BHND'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1817/LJE.1.SUVDC':
+                            link = 'https://www.bible.com/bible/1817/SUS.1.SUVDC'
+                            continue
                         else:
                             raise
                 #Write the book title and chapter number to the file
@@ -181,3 +188,5 @@ for languageLink in languageLinks:
                     link = 'http://www.bible.com' + nextLinkHtml.get('href')
                 except:
                     break
+
+# TODO: Remove undersocring before and after dashes in language names in filenames
