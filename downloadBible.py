@@ -49,7 +49,7 @@ for languageLink in languageLinks:
     languageName = {v: k for k, v in languageList.items()}[languageLink[11:]]
     print("Initiating {}".format(languageName))
     #Make a directory to store bible translations for one language
-    newDir = os.path.join(os.getcwd(), languageName)
+    newDir = os.path.join(os.getcwd(), languageName.replace(':', ''))
     try:
         os.makedirs(newDir)
     except:
@@ -73,14 +73,15 @@ for languageLink in languageLinks:
             continue
     #Access each tranlation
     for translationName, translationLink in translations[languageLink].items():
-#        codes = re.search(translationPattern, translationLink).group(1, 2)
+        codes = re.search(translationPattern, translationLink).group(1, 2)
         translationCodes[translationName] = codes
     for translationName, translationCode in translationCodes.items():
         print("Initiating {}".format(translationName))
+        print(translationCode) #delete
         #Write into a file for the particular translation
         languageName = '_'.join(languageName.split(' '))
         translationName = '_'.join(translationName.split(' '))
-        fileName = os.path.join(newDir, '{}--{}.txt'.format(languageName, translationName).replace(':', '').replace('/', '-'))
+        fileName = os.path.join(newDir, '{}--{}.txt'.format(languageName, translationName).replace(':', '').replace('/', '-').replace('"', ''))
         #Check if the file exists to skip if necessary (to resume the program when it hits an unexpected error)
         if os.path.isfile(fileName):
             continue
@@ -93,6 +94,7 @@ for languageLink in languageLinks:
                 if len(spans) == 0:
                     spans = chapterSoup.select('span[class="content"]')
                 #Check if the link is not broken (the first occurrence is https://www.bible.com/bible/37/S3Y.1.CEB)
+                print(link)
                 try:
                     print("    Initiating {}".format(chapterSoup.select_one('title').getText().split(',')[0]))
                 except:
@@ -164,6 +166,12 @@ for languageLink in languageLinks:
                             continue
                         elif oldLink == 'http://www.bible.com/bible/1817/LJE.1.SUVDC':
                             link = 'https://www.bible.com/bible/1817/SUS.1.SUVDC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/228/LJE.1.BPT09DC':
+                            link = 'https://www.bible.com/bible/228/SUS.1.BPT09DC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/464/LJE.1_1.SEBDT':
+                            link = 'https://www.bible.com/bible/464/SUS.1_1.SEBDT'
                             continue
                         else:
                             raise
