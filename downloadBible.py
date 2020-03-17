@@ -44,7 +44,7 @@ for name, code in languageList.items():
             continue
 ###Loop through the language links to get translation lists
 translations = dict()
-translationPattern = re.compile('(?<=versions/)(.+?)-(.+?)-')
+translationPattern = re.compile('(?<=versions/)(\w+)-(\w+)')
 for languageLink in languageLinks:
     languageName = {v: k for k, v in languageList.items()}[languageLink[11:]]
     print("Initiating {}".format(languageName))
@@ -77,7 +77,6 @@ for languageLink in languageLinks:
         translationCodes[translationName] = codes
     for translationName, translationCode in translationCodes.items():
         print("Initiating {}".format(translationName))
-        print(translationCode) #delete
         #Write into a file for the particular translation
         languageName = '_'.join(languageName.split(' '))
         translationName = '_'.join(translationName.split(' '))
@@ -94,7 +93,7 @@ for languageLink in languageLinks:
                 if len(spans) == 0:
                     spans = chapterSoup.select('span[class="content"]')
                 #Check if the link is not broken (the first occurrence is https://www.bible.com/bible/37/S3Y.1.CEB)
-                print(link)
+                print(link) #delete
                 try:
                     print("    Initiating {}".format(chapterSoup.select_one('title').getText().split(',')[0]))
                 except:
@@ -173,6 +172,18 @@ for languageLink in languageLinks:
                         elif oldLink == 'http://www.bible.com/bible/464/LJE.1_1.SEBDT':
                             link = 'https://www.bible.com/bible/464/SUS.1_1.SEBDT'
                             continue
+                        elif oldLink == 'http://www.bible.com/bible/2308/LJE.1.KKDEU':
+                            link = 'https://www.bible.com/bible/2308/SUS.1.KKDEU'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2308/MAN.1.KKDEU':
+                            link = 'https://www.bible.com/bible/2308/4MA.1.KKDEU'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/901/BEL.1.%D0%9D%D0%9F':
+                            link = 'http://www.bible.com/bible/901/MAN.1.НП'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/901/MAN.1.НП':
+                            link = 'https://www.bible.com/bible/901/MAT.1.НП'
+                            continue
                         else:
                             raise
                 #Write the book title and chapter number to the file
@@ -194,6 +205,27 @@ for languageLink in languageLinks:
                     nextLinkHtml = chapterSoup.select_one('a[data-vars-event-action="Next"]')
                     oldLink = link
                     link = 'http://www.bible.com' + nextLinkHtml.get('href')
+                    #This Ukrainian translation has wrong links on some pages, leading to the same page
+                    if oldLink == 'http://www.bible.com/bible/1755/1SA.21.UTT' and link == 'http://www.bible.com/bible/1755/1SA.21.UTT':
+                        link = 'http://www.bible.com/bible/1755/1SA.22.UTT'
+                    elif oldLink == 'http://www.bible.com/bible/1755/ESG.1.UTT' and link == 'http://www.bible.com/bible/1755/ESG.1.UTT':
+                        link = 'http://www.bible.com/bible/1755/ESG.2.UTT'
+                    elif oldLink == 'http://www.bible.com/bible/1755/ESG.3.UTT' and link == 'http://www.bible.com/bible/1755/ESG.3.UTT':
+                        link = 'http://www.bible.com/bible/1755/ESG.4.UTT'
+                    elif oldLink == 'http://www.bible.com/bible/1755/ESG.4.UTT' and link == 'http://www.bible.com/bible/1755/ESG.4.UTT':
+                        link = 'http://www.bible.com/bible/1755/ESG.5.UTT'
+                    elif oldLink == 'http://www.bible.com/bible/1755/ESG.5.UTT' and link == 'http://www.bible.com/bible/1755/ESG.5.UTT':
+                        link = 'http://www.bible.com/bible/1755/ESG.6.UTT'
+                    elif oldLink == 'http://www.bible.com/bible/1755/ESG.8.UTT' and link == 'http://www.bible.com/bible/1755/ESG.8.UTT':
+                        link = 'http://www.bible.com/bible/1755/ESG.9.UTT'
+                    elif oldLink == 'http://www.bible.com/bible/1755/ESG.10.UTT' and link == 'http://www.bible.com/bible/1755/ESG.10.UTT':
+                        link = 'http://www.bible.com/bible/1755/JOB.1.UTT'
+                    elif oldLink == 'http://www.bible.com/bible/1755/SIR.1.UTT' and link == 'http://www.bible.com/bible/1755/SIR.1.UTT':
+                        link = 'http://www.bible.com/bible/1755/SIR.2.UTT'
+                    elif oldLink == 'http://www.bible.com/bible/1755/SIR.5.UTT' and link == 'http://www.bible.com/bible/1755/SIR.5.UTT':
+                        link = 'http://www.bible.com/bible/1755/SIR.6.UTT'
+                    elif oldLink == 'http://www.bible.com/bible/1755/ISA.63.UTT' and link == 'http://www.bible.com/bible/1755/ISA.63.UTT':
+                        link = 'http://www.bible.com/bible/1755/ISA.64.UTT'
                 except:
                     break
 
