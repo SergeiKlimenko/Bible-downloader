@@ -44,7 +44,7 @@ for name, code in languageList.items():
             continue
 ###Loop through the language links to get translation lists
 translations = dict()
-translationPattern = re.compile('(?<=versions/)(\w+)-(\w+)')
+translationPattern = re.compile('(?<=versions/)(\w+)-([\w|%]+)')
 for languageLink in languageLinks:
     languageName = {v: k for k, v in languageList.items()}[languageLink[11:]]
     print("Initiating {}".format(languageName))
@@ -183,6 +183,12 @@ for languageLink in languageLinks:
                             continue
                         elif oldLink == 'http://www.bible.com/bible/901/MAN.1.НП':
                             link = 'https://www.bible.com/bible/901/MAT.1.НП'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1819/BEL.1.%E6%96%B0%E5%85%B1%E5%90%8C%E8%A8%B3':
+                            link = 'http://www.bible.com/bible/1819/1ES.1.新共同訳'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1889/LJE.1_1.%E6%AC%A1%E7%B6%93':
+                            link = 'https://www.bible.com/bible/1889/SUS.1_1.次經'
                             continue
                         else:
                             raise
