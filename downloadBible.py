@@ -44,7 +44,7 @@ for name, code in languageList.items():
             continue
 ###Loop through the language links to get translation lists
 translations = dict()
-translationPattern = re.compile('(?<=versions/)(\w+)-([\w|%]+)')
+translationPattern = re.compile('(?<=versions/)(\w+)-([\w|%]+)?')
 for languageLink in languageLinks:
     languageName = {v: k for k, v in languageList.items()}[languageLink[11:]]
     print("Initiating {}".format(languageName))
@@ -66,9 +66,9 @@ for languageLink in languageLinks:
                 #Check if the language is already in the dictionary to add another translation:
                 codes = re.search(translationPattern, item.get('href')).group(1, 2)
                 if languageLink in translations:
-                    translations[languageLink][item.getText()+'_'+codes[1]] = item.get('href')
+                    translations[languageLink][item.getText()+'_'+str(codes[1])] = item.get('href')
                 else:
-                    translations[languageLink] = {item.getText()+'_'+codes[1]:item.get('href')}
+                    translations[languageLink] = {item.getText()+'_'+str(codes[1]):item.get('href')}
         except:
             continue
     #Access each tranlation
@@ -192,6 +192,12 @@ for languageLink in languageLinks:
                             continue
                         elif oldLink == 'http://www.bible.com/bible/592/BAR.6.KCB':
                             link = 'http://www.bible.com/bible/592/SUS.1_1.KCB'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2188/LJE.1_1.MBBCEB99':
+                            link = 'http://www.bible.com/bible/2188/SUS.1.MBBCEB99'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/890/LJE.1.BPV':
+                            link = 'https://www.bible.com/bible/890/SUS.1.BPV'
                             continue
                         else:
                             raise
