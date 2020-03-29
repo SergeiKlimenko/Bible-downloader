@@ -202,6 +202,30 @@ for languageLink in languageLinks:
                         elif oldLink == 'http://www.bible.com/bible/1754/LJE.1.AKKDC08':
                             link = 'http://www.bible.com/bible/1754/SUS.1_1.AKKDC08'
                             continue
+                        elif oldLink == 'http://www.bible.com/bible/905/LJE.1.FBDC':
+                            link = 'http://www.bible.com/bible/905/SUS.1_1.FBDC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1807/BAR.6.MACGAP':
+                            link = 'http://www.bible.com/bible/1807/SUS.1.MACGAP'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2190/LJE.1.MBBHIL12':
+                            link = 'http://www.bible.com/bible/2190/SUS.1.MBBHIL12'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/171/LJE.1.BK':
+                            link = 'http://www.bible.com/bible/171/SUS.INTRO1.BK'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1079/BAR.6.ABK':
+                            link = 'http://www.bible.com/bible/1079/SUS.1.ABK'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1202/BAR.6.GIKDC':
+                            link = 'http://www.bible.com/bible/1202/SUS.INTRO1.GIKDC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/387/LJE.1_1.BIRD':
+                            link = 'http://www.bible.com/bible/387/SUS.1_1.BIRD'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1393/DAN.12.BKPDCG':
+                            link = 'http://www.bible.com/bible/1393/SUS.1_1.BKPDCG'
+                            continue
                         else:
                             raise
                 #Write the book title and chapter number to the file
