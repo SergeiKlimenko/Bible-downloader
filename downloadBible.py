@@ -27,7 +27,7 @@ languageList = dict()
 for languageLink in potentialLanguageLinks:
     #Not all links in the gathered potentialLanguageLinks contain language codes
     try:
-        languageCode = re.search('(?<=\().{3}(?:_.{2,3})?(?=\))', languageLink.get('title')).group()
+        languageCode = re.search('(?<=\().{3}(?:_.{2,3})?(?=\)$)', languageLink.get('title')).group()
         languageList[languageLink.getText().strip()] = languageCode
     except:
         continue
@@ -86,6 +86,8 @@ for languageLink in languageLinks:
             continue
         with open(fileName, 'a', encoding='utf-8-sig') as f:
             link = 'http://www.bible.com/bible/{}/GEN.INTRO1.{}'.format(translationCode[0], translationCode[1])
+            chapterSoup = getPage(link)
+            link = chapterSoup.select_one('link[rel="canonical"]').get('href')
             while True:
                 chapterSoup = getPage(link)
                 spans = chapterSoup.select('span[class^="verse"]')
@@ -226,10 +228,31 @@ for languageLink in languageLinks:
                         elif oldLink == 'http://www.bible.com/bible/1393/DAN.12.BKPDCG':
                             link = 'http://www.bible.com/bible/1393/SUS.1_1.BKPDCG'
                             continue
+                        elif oldLink == 'http://www.bible.com/bible/1957/LJE.1.HAT98':
+                            link = 'http://www.bible.com/bible/1957/SUS.1_1.HAT98'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/552/LJE.1.BB03':
+                            link = 'http://www.bible.com/bible/552/SUS.INTRO1.BB03'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/825/LJE.1_1.BYK09':
+                            link = 'http://www.bible.com/bible/825/SUS.1.BYK09'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/99/LJE.1.TMT':
+                            link = 'http://www.bible.com/bible/99/SUS.1_1.TMT'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/868/LJE.1.GB11DC':
+                            link = 'https://www.bible.com/bible/868/SUS.1.GB11DC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2235/LJE.1_1.BASSARDC':
+                            link = 'https://www.bible.com/bible/2235/SUS.1_1.BASSARDC'
+                            continue
                         else:
                             raise
                 #Write the book title and chapter number to the file
-                f.write('_'.join(chapterSoup.select_one('title').getText().split(',')[0].upper().split()) + '\n')
+                splitLink = link.split('/')[-1]
+                codes = re.search('(\w+\.\w+)(?=\.)', splitLink).group()
+                
+                f.write('_'.join(chapterSoup.select_one('title').getText().split(',')[0].upper().split()) + ' (' + codes + ')\n')
                 #Write verses to the file
                 for span in spans:
                     if span.getText() == ' ':
