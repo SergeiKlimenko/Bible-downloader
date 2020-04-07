@@ -252,6 +252,12 @@ for languageLink in languageLinks:
                         elif oldLink == 'http://www.bible.com/bible/2194/LJE.1.MBBPAN83':
                             link = 'http://www.bible.com/bible/2194/SUS.1.MBBPAN83'
                             continue
+                        elif oldLink == 'http://www.bible.com/bible/1166/LJE.1.PNPV':
+                            link = 'http://www.bible.com/bible/1166/SUS.1.PNPV'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/614/LJE.1.SIDC':
+                            link = 'https://www.bible.com/bible/614/SUS.1.SIDC'
+                            continue
                         else:
                             raise
                 #Write the book title and chapter number to the file
