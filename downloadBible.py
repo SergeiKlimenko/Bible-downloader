@@ -80,7 +80,7 @@ for languageLink in languageLinks:
         #Write into a file for the particular translation
         languageName = '_'.join(languageName.split(' '))
         translationName = '_'.join(translationName.split(' '))
-        fileName = os.path.join(newDir, '{}--{}.txt'.format(languageName, translationName).replace(':', '').replace('/', '-').replace('"', ''))
+        fileName = os.path.join(newDir, '{}--{}.txt'.format(languageName, translationName).replace(':', '').replace('/', '-').replace('"', '').replace('|', ''))
         #Check if the file exists to skip if necessary (to resume the program when it hits an unexpected error)
         if os.path.isfile(fileName):
             continue
@@ -257,6 +257,12 @@ for languageLink in languageLinks:
                             continue
                         elif oldLink == 'http://www.bible.com/bible/614/LJE.1.SIDC':
                             link = 'https://www.bible.com/bible/614/SUS.1.SIDC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1515/LJE.1_1.KBDC':
+                            link = 'http://www.bible.com/bible/1515/SUS.INTRO1.KBDC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/445/LJE.1_1.BSDC':
+                            link = 'http://www.bible.com/bible/445/SUS.1_1.BSDC'
                             continue
                         else:
                             raise
