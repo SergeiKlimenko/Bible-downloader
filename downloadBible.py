@@ -264,6 +264,30 @@ for languageLink in languageLinks:
                         elif oldLink == 'http://www.bible.com/bible/445/LJE.1_1.BSDC':
                             link = 'http://www.bible.com/bible/445/SUS.1_1.BSDC'
                             continue
+                        elif oldLink == 'http://www.bible.com/bible/1053/LJE.1.BSK':
+                            link = 'http://www.bible.com/bible/1053/SUS.INTRO1.BSK'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2156/LJE.1.SHKDCB':
+                            link = 'http://www.bible.com/bible/2156/SUS.INTRO1.SHKDCB'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2415/BEL.1.DAL1584':
+                            link = 'http://www.bible.com/bible/2415/MAN.1.DAL1584'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/1256/SUS.1.SOG':
+                            link = 'http://www.bible.com/bible/1256/BEL.INTRO1.SOG'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/550/LJE.1.BEGDC':
+                            link = 'http://www.bible.com/bible/550/SUS.INTRO1.BEGDC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/382/LJE.1.TZE97':
+                            link = 'http://www.bible.com/bible/382/SUS.1_1.TZE97'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2353/BAR.6.DQDC':
+                            link = 'http://www.bible.com/bible/2353/SUS.1_1.DQDC'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2249/BAR.6.QCHSB':
+                            link = 'http://www.bible.com/bible/2249/SUS.1_1.QCHSB'
+                            continue
                         else:
                             raise
                 #Write the book title and chapter number to the file
