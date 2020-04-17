@@ -49,7 +49,7 @@ for languageLink in languageLinks:
     languageName = {v: k for k, v in languageList.items()}[languageLink[11:]]
     print("Initiating {}".format(languageName))
     #Make a directory to store bible translations for one language
-    newDir = os.path.join(os.getcwd(), languageName.replace(':', ''))
+    newDir = os.path.join(os.getcwd(), languageName.replace(':', '').replace('/', '-'))
     try:
         os.makedirs(newDir)
     except:
@@ -287,6 +287,15 @@ for languageLink in languageLinks:
                             continue
                         elif oldLink == 'http://www.bible.com/bible/2249/BAR.6.QCHSB':
                             link = 'http://www.bible.com/bible/2249/SUS.1_1.QCHSB'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/675/BAR.5.FNVDC12':
+                            link = 'http://www.bible.com/bible/675/SUS.INTRO1.FNVDC12'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2198/LJE.1.MBBSAM':
+                            link = 'http://www.bible.com/bible/2198/SUS.1.MBBSAM'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/418/LJE.1.TSO89':
+                            link = 'http://www.bible.com/bible/418/SUS.1.TSO89'
                             continue
                         else:
                             raise
