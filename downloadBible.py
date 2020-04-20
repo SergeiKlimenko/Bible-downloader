@@ -87,6 +87,8 @@ for languageLink in languageLinks:
         with open(fileName, 'a', encoding='utf-8-sig') as f:
             link = 'http://www.bible.com/bible/{}/GEN.INTRO1.{}'.format(translationCode[0], translationCode[1])
             chapterSoup = getPage(link)
+            if chapterSoup.select_one('body').getText() == 'Not Found':
+                continue
             link = chapterSoup.select_one('link[rel="canonical"]').get('href')
             while True:
                 chapterSoup = getPage(link)
@@ -296,6 +298,9 @@ for languageLink in languageLinks:
                             continue
                         elif oldLink == 'http://www.bible.com/bible/418/LJE.1.TSO89':
                             link = 'http://www.bible.com/bible/418/SUS.1.TSO89'
+                            continue
+                        elif oldLink == 'http://www.bible.com/bible/2248/BAR.6.SCLBD':
+                            link = 'http://www.bible.com/bible/2248/1MA.INTRO1.SCLBD'
                             continue
                         else:
                             raise
